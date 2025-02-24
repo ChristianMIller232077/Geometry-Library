@@ -1,0 +1,449 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+// 2D
+
+string squareArea();
+string squarePerimeter();
+string rectangleArea();
+string rectanglePerimeter();
+string triangleArea();
+string trianglePerimeter();
+string trapezoidArea();
+string trapezoidPerimeter();
+string circleArea();
+string circleCircumference();
+
+string handle2D();
+
+// 3D 
+string cubeSurfaceArea();
+string cubeVolume();
+string sphereSurfaceArea();
+string sphereVolume();
+string cylinderSurfaceArea();
+string cylinderVolume();
+string coneSurfaceArea();
+string coneVolume();
+string pyramidSurfaceArea();
+string pyramidVolume();
+
+string handle3D();
+
+
+
+// 2D HANDLE and Functions
+
+string handle2D() {
+    string shape;
+    cout << "What is your shape (square, rectangle, triangle, trapezoid, circle): ";
+    cin >> shape;
+    string cal;
+    
+    if (shape == "square" || shape == "Square" || shape == "SQUARE") {
+        cout << "What are you looking for (area/perimeter): ";
+        cin >> cal;
+        if (cal == "area" || cal == "Area" || cal == "AREA") {
+            return squareArea();
+        } else if (cal == "perimeter" || cal == "Perimeter" || cal == "PERIMETER") {
+            return squarePerimeter();
+        }
+    }
+    else if (shape == "rectangle" || shape == "Rectangle" || shape == "RECTANGLE") {
+        cout << "What are you looking for (area/perimeter): ";
+        cin >> cal;
+        if (cal == "area" || cal == "Area" || cal == "AREA") {
+            return rectangleArea();
+        } else if (cal == "perimeter" || cal == "Perimeter" || cal == "PERIMETER") {
+            return rectanglePerimeter();
+        }
+    }
+    else if (shape == "triangle" || shape == "Triangle" || shape == "TRIANGLE") {
+        cout << "What are you looking for (area/perimeter): ";
+        cin >> cal;
+        if (cal == "area" || cal == "Area" || cal == "AREA") {
+            return triangleArea();
+        } else if (cal == "perimeter" || cal == "Perimeter" || cal == "PERIMETER") {
+            return trianglePerimeter();
+        }
+    }
+    else if (shape == "trapezoid" || shape == "Trapezoid" || shape == "TRAPEZOID") {
+        cout << "What are you looking for (area/perimeter): ";
+        cin >> cal;
+        if (cal == "area" || cal == "Area" || cal == "AREA") {
+            return trapezoidArea();
+        } else if (cal == "perimeter" || cal == "Perimeter" || cal == "PERIMETER") {
+            return trapezoidPerimeter();
+        }
+    }
+    else if (shape == "circle" || shape == "Circle" || shape == "CIRCLE") {
+        cout << "What are you looking for (area/circumference): ";
+        cin >> cal;
+        if (cal == "area" || cal == "Area" || cal == "AREA") {
+            return circleArea();
+        } else if (cal == "circumference" || cal == "Circumference" || cal == "CIRCUMFERENCE") {
+            return circleCircumference();
+        }
+    }
+    return "Invalid shape or calculation type for 2D.";
+}
+
+string squareArea() {
+    float a;
+    cout << "What is the length of the sides: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    float A = a * a;
+    return "The area for your square is: " + to_string(A);
+}
+
+string squarePerimeter() {
+    float a;
+    cout << "What is the length of the sides: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    float P = 4 * a;
+    return "The perimeter of your square is: " + to_string(P);
+}
+
+string rectangleArea() {
+    float a, b;
+    cout << "What is your length: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is your width: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    float A = a * b;
+    return "The area for your rectangle is: " + to_string(A);
+}
+
+string rectanglePerimeter() {
+    float a, b;
+    cout << "What is your length: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is your width: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    float P = 2 * a + 2 * b;
+    return "The perimeter for your rectangle is: " + to_string(P);
+}
+
+string triangleArea() {
+    float a, b;
+    cout << "How long is the base of the triangle: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is the height of the triangle: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    float A = 0.5 * a * b;
+    return "The area of your triangle is: " + to_string(A);
+}
+
+string trianglePerimeter() {
+    float a, b, c;
+    cout << "What is the length of the first side: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is the length of the second side: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    cout << "What is the length of the third side: ";
+    cin >> c;
+    if(c < 0)
+        return "Invalid input";
+    float P = a + b + c;
+    return "The perimeter of your triangle is: " + to_string(P);
+}
+
+string trapezoidArea() {
+    float a, b, c;
+    cout << "What is the length of the top base: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is the length of the bottom base: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    cout << "What is the height of the trapezoid: ";
+    cin >> c;
+    if(c < 0)
+        return "Invalid input";
+    float A = ((a + b) / 2.0) * c;
+    return "The area of your trapezoid is: " + to_string(A);
+}
+
+string trapezoidPerimeter() {
+    float a, b, c, d;
+    cout << "What is the length of the first side: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is the length of the second side: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    cout << "What is the length of the third side: ";
+    cin >> c;
+    if(c < 0)
+        return "Invalid input";
+    cout << "What is the length of the fourth side: ";
+    cin >> d;
+    if(d < 0)
+        return "Invalid input";
+    float P = a + b + c + d;
+    return "The perimeter of your trapezoid is: " + to_string(P);
+}
+
+string circleArea() {
+    float r;
+    cout << "What is the radius of your circle: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    float A = M_PI * r * r;
+    return "The area of your circle is: " + to_string(A);
+}
+
+string circleCircumference() {
+    float r;
+    cout << "What is the radius of your circle: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    float C = 2 * M_PI * r;
+    return "The circumference of your circle is: " + to_string(C);
+}
+
+// 3D HANDLE and Functions.
+
+//surface area has spaces. 
+
+string handle3D() {
+    string shape;
+    cout << "What is your shape (cube, sphere, cylinder, cone, pyramid): ";
+    cin >> shape;
+    string cal;
+
+    if (shape == "cube" || shape == "Cube" || shape == "CUBE") {
+        cout << "What are you looking for (surface area/volume): ";
+
+        cin.ignore(); // clear newline from previous input. from cplusplus.com
+
+        getline(cin, cal); // grabs entire line. from cplusplus.com
+
+        if (cal == "surface area" || cal == "Surface area" || cal == "Surface Area" || cal == "SURFACEAREA") {
+            return cubeSurfaceArea();
+        } else if (cal == "volume" || cal == "Volume" || cal == "VOLUME") {
+            return cubeVolume();
+        }
+    }
+    else if (shape == "sphere" || shape == "Sphere" || shape == "SPHERE") {
+        cout << "What are you looking for (surface area/volume): ";
+        cin.ignore();
+        getline(cin, cal);
+        if (cal == "surface area" || cal == "Surface area" || cal == "SURFACEAREA") {
+            return sphereSurfaceArea();
+        } else if (cal == "volume" || cal == "Volume" || cal == "VOLUME") {
+            return sphereVolume();
+        }
+    }
+    else if (shape == "cylinder" || shape == "Cylinder" || shape == "CYLINDER") {
+        cout << "What are you looking for (surface area/volume): ";
+        cin.ignore();
+        getline(cin, cal);
+        if (cal == "surface area" || cal == "Surface area" || cal == "SURFACEAREA") {
+            return cylinderSurfaceArea();
+        } else if (cal == "volume" || cal == "Volume" || cal == "VOLUME") {
+            return cylinderVolume();
+        }
+    }
+    else if (shape == "cone" || shape == "Cone" || shape == "CONE") {
+        cout << "What are you looking for (surface area/volume): ";
+        cin.ignore();
+        getline(cin, cal);
+        if (cal == "surface area" || cal == "Surface area" || cal == "SURFACEAREA") {
+            return coneSurfaceArea();
+        } else if (cal == "volume" || cal == "Volume" || cal == "VOLUME") {
+            return coneVolume();
+        }
+    }
+    else if (shape == "pyramid" || shape == "Pyramid" || shape == "PYRAMID") {
+        cout << "What are you looking for (surface area/volume): ";
+        cin.ignore();
+        getline(cin, cal);
+        if (cal == "surface area" || cal == "Surface area" || cal == "SURFACEAREA") {
+            return pyramidSurfaceArea();
+        } else if (cal == "volume" || cal == "Volume" || cal == "VOLUME") {
+            return pyramidVolume();
+        }
+    }
+    return "Invalid shape or calculation type for 3D.";
+}
+
+string cubeSurfaceArea() {
+    float a;
+    cout << "What is the length of the sides: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    float Z = 6 * a * a;
+    return "The surface area of your cube is: " + to_string(Z);
+}
+
+string cubeVolume() {
+    float a;
+    cout << "What is the length of the sides: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    float V = a * a * a;
+    return "The volume of your cube is: " + to_string(V);
+}
+
+string sphereSurfaceArea() {
+    float r;
+    cout << "What is the radius of your sphere: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    float Z = 4 * M_PI * r * r;
+    return "The surface area of your sphere is: " + to_string(Z);
+}
+
+string sphereVolume() {
+    float r;
+    cout << "What is the radius of your sphere: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    float V = (4.0 / 3.0) * M_PI * r * r * r;
+    return "The volume of your sphere is: " + to_string(V);
+}
+
+string cylinderSurfaceArea() {
+    float r, h;
+    cout << "What is the radius of your cylinder: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    cout << "What is the height of your cylinder: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    float Z = 2 * M_PI * r * h + 2 * M_PI * r * r;
+    return "The surface area of your cylinder is: " + to_string(Z);
+}
+
+string cylinderVolume() {
+    float r, h;
+    cout << "What is the radius of your cylinder: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    cout << "What is the height of your cylinder: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    float V = M_PI * r * r * h;
+    return "The volume of your cylinder is: " + to_string(V);
+}
+
+string coneSurfaceArea() {
+    float r, h;
+    cout << "What is the radius of your cone: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    cout << "What is the height of your cone: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    float Z = M_PI * r * (r * sqrt(h * h + r * r));
+    return "The surface area of your cone is: " + to_string(Z);
+}
+
+string coneVolume() {
+    float r, h;
+    cout << "What is the radius of your cone: ";
+    cin >> r;
+    if(r < 0)
+        return "Invalid input";
+    cout << "What is the height of your cone: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    float V = (1.0 / 3.0) * M_PI * r * r * h;
+    return "The volume of your cone is: " + to_string(V);
+}
+
+string pyramidSurfaceArea() {
+    float a, b, h;
+    cout << "What is the width of the base of your pyramid: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    cout << "What is the height of the pyramid: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    cout << "What is the base length of your pyramid: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    float Z = b * a + b * sqrt((a / 2.0) * (a / 2.0) + h * h) + a * sqrt((b / 2.0) * (b / 2.0) + h * h);
+    return "The surface area of your pyramid is: " + to_string(Z);
+}
+
+string pyramidVolume() {
+    float a, b, h;
+    cout << "What is the base width of the pyramid: ";
+    cin >> b;
+    if(b < 0)
+        return "Invalid input";
+    cout << "What is the height of the pyramid: ";
+    cin >> h;
+    if(h < 0)
+        return "Invalid input";
+    cout << "What is the base length of your pyramid: ";
+    cin >> a;
+    if(a < 0)
+        return "Invalid input";
+    float V = (1.0 / 3.0) * a * b * h;
+    return "The volume of your pyramid is: " + to_string(V);
+}
+
+// MAIN FUNCTION. 
+
+int main() {
+    string dimensions;
+    cout << "How many dimensions is your shape (2D/3D): ";
+    cin >> dimensions;
+    
+    string result;
+    if (dimensions == "2D" || dimensions == "2d" || dimensions == "2") {
+        result = handle2D();
+    } else if (dimensions == "3D" || dimensions == "3d" || dimensions == "3") {
+        result = handle3D();
+    } else {
+        result = "Invalid input for dimensions.";
+    }
+    
+    cout << result << endl;
+    return 0;
+}
