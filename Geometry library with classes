@@ -1,0 +1,262 @@
+#ifndef __CODE_V2_H_
+#define __CODE_V2_H_
+
+#include <iostream>
+#include <cmath>
+#include <string>
+using namespace std;
+
+//Base Classes
+class Shape2D {
+public:
+    virtual string calculate(string type) = 0;
+    virtual ~Shape2D() = default;
+};
+
+class Shape3D {
+public:
+    virtual string calculate(string type) = 0;
+    virtual ~Shape3D() = default;
+};
+
+//2D Shapes
+class Square : public Shape2D {
+public:
+    string calculate(string type) override {
+        float a;
+        cout << "What is the length of the sides: ";
+        cin >> a;
+        if (a < 0) return "Invalid input";
+
+        if (type == "area") {
+            return "The area of your square is: " + to_string(a * a);
+        } else if (type == "perimeter") {
+            return "The perimeter of your square is: " + to_string(4 * a);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Rectangle : public Shape2D {
+public:
+    string calculate(string type) override {
+        float l, w;
+        cout << "What is your length: ";
+        cin >> l;
+        cout << "What is your width: ";
+        cin >> w;
+        if (l < 0 || w < 0) return "Invalid input";
+
+        if (type == "area") {
+            return "The area of your rectangle is: " + to_string(l * w);
+        } else if (type == "perimeter") {
+            return "The perimeter of your rectangle is: " + to_string(2 * (l + w));
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Triangle : public Shape2D {
+public:
+    string calculate(string type) override {
+        if (type == "area") {
+            float base, height;
+            cout << "Base: "; cin >> base;
+            cout << "Height: "; cin >> height;
+            if (base < 0 || height < 0) return "Invalid input";
+            return "Area: " + to_string(0.5 * base * height);
+        } else if (type == "perimeter") {
+            float a, b, c;
+            cout << "Side 1: "; cin >> a;
+            cout << "Side 2: "; cin >> b;
+            cout << "Side 3: "; cin >> c;
+            if (a < 0 || b < 0 || c < 0) return "Invalid input";
+            return "Perimeter: " + to_string(a + b + c);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Trapezoid : public Shape2D {
+public:
+    string calculate(string type) override {
+        if (type == "area") {
+            float a, b, h;
+            cout << "Top base: "; cin >> a;
+            cout << "Bottom base: "; cin >> b;
+            cout << "Height: "; cin >> h;
+            if (a < 0 || b < 0 || h < 0) return "Invalid input";
+            return "Area: " + to_string(((a + b) / 2.0f) * h);
+        } else if (type == "perimeter") {
+            float a, b, c, d;
+            cout << "Side 1: "; cin >> a;
+            cout << "Side 2: "; cin >> b;
+            cout << "Side 3: "; cin >> c;
+            cout << "Side 4: "; cin >> d;
+            if (a < 0 || b < 0 || c < 0 || d < 0) return "Invalid input";
+            return "Perimeter: " + to_string(a + b + c + d);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Circle : public Shape2D {
+public:
+    string calculate(string type) override {
+        float r;
+        cout << "Radius: "; cin >> r;
+        if (r < 0) return "Invalid input";
+        if (type == "area") {
+            return "Area: " + to_string(M_PI * r * r);
+        } else if (type == "circumference") {
+            return "Circumference: " + to_string(2 * M_PI * r);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+//3D Shapes
+class Cube : public Shape3D {
+public:
+    string calculate(string type) override {
+        float a;
+        cout << "Side length: "; cin >> a;
+        if (a < 0) return "Invalid input";
+        if (type == "surface area") {
+            return "Surface Area: " + to_string(6 * a * a);
+        } else if (type == "volume") {
+            return "Volume: " + to_string(a * a * a);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Sphere : public Shape3D {
+public:
+    string calculate(string type) override {
+        float r;
+        cout << "Radius: "; cin >> r;
+        if (r < 0) return "Invalid input";
+        if (type == "surface area") {
+            return "Surface Area: " + to_string(4 * M_PI * r * r);
+        } else if (type == "volume") {
+            return "Volume: " + to_string((4.0 / 3.0) * M_PI * r * r * r);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Cylinder : public Shape3D {
+public:
+    string calculate(string type) override {
+        float r, h;
+        cout << "Radius: "; cin >> r;
+        cout << "Height: "; cin >> h;
+        if (r < 0 || h < 0) return "Invalid input";
+        if (type == "surface area") {
+            return "Surface Area: " + to_string(2 * M_PI * r * (h + r));
+        } else if (type == "volume") {
+            return "Volume: " + to_string(M_PI * r * r * h);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Cone : public Shape3D {
+public:
+    string calculate(string type) override {
+        float r, h;
+        cout << "Radius: "; cin >> r;
+        cout << "Height: "; cin >> h;
+        if (r < 0 || h < 0) return "Invalid input";
+        if (type == "surface area") {
+            return "Surface Area: " + to_string(M_PI * r * (r + sqrt(h * h + r * r)));
+        } else if (type == "volume") {
+            return "Volume: " + to_string((1.0 / 3.0) * M_PI * r * r * h);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+class Pyramid : public Shape3D {
+public:
+    string calculate(string type) override {
+        float l, w, h;
+        cout << "Length: "; cin >> l;
+        cout << "Width: "; cin >> w;
+        cout << "Height: "; cin >> h;
+        if (l < 0 || w < 0 || h < 0) return "Invalid input";
+        if (type == "surface area") {
+            float sa = l * w + l * sqrt(pow(w / 2.0, 2) + h * h) + w * sqrt(pow(l / 2.0, 2) + h * h);
+            return "Surface Area: " + to_string(sa);
+        } else if (type == "volume") {
+            return "Volume: " + to_string((1.0 / 3.0) * l * w * h);
+        }
+        return "Invalid calculation type.";
+    }
+};
+
+//Input Handlers
+string handle2D() {
+    string shape, calc;
+    cout << "Shape (square, rectangle, triangle, trapezoid, circle): ";
+    cin >> shape;
+    cout << "Calculation type (area/perimeter/circumference): ";
+    cin >> calc;
+
+    Shape2D* obj = nullptr;
+
+    if (shape == "square") obj = new Square();
+    else if (shape == "rectangle") obj = new Rectangle();
+    else if (shape == "triangle") obj = new Triangle();
+    else if (shape == "trapezoid") obj = new Trapezoid();
+    else if (shape == "circle") obj = new Circle();
+
+    string result = (obj) ? obj->calculate(calc) : "Invalid shape.";
+    delete obj;
+    return result;
+}
+
+string handle3D() {
+    string shape, calc;
+    cout << "Shape (cube, sphere, cylinder, cone, pyramid): ";
+    cin >> shape;
+    cin.ignore(); // Clear newline
+    cout << "Calculation type (surface area/volume): ";
+    getline(cin, calc);
+
+    Shape3D* obj = nullptr;
+
+    if (shape == "cube") obj = new Cube();
+    else if (shape == "sphere") obj = new Sphere();
+    else if (shape == "cylinder") obj = new Cylinder();
+    else if (shape == "cone") obj = new Cone();
+    else if (shape == "pyramid") obj = new Pyramid();
+
+    string result = (obj) ? obj->calculate(calc) : "Invalid shape.";
+    delete obj;
+    return result;
+}
+
+#endif
+
+
+#include "__Code_V2_H_"
+
+int main() {
+    string dim;
+    cout << "Dimensions (2D/3D): ";
+    cin >> dim;
+
+    string result;
+    if (dim == "2D" || dim == "2") {
+        result = handle2D();
+    } else if (dim == "3D" || dim == "3") {
+        result = handle3D();
+    } else {
+        result = "Invalid dimension input.";
+    }
+
+    cout << result << endl;
+    return 0;
+}
