@@ -1,0 +1,177 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+const float PI = 3.14159265f;
+
+class Dimensions {
+protected:
+    float d1, d2, d3;
+public:
+    virtual void setDimensions(float x1, float x2 = 0, float x3 = 0) = 0;
+    virtual ~Dimensions() {}
+};
+
+class Shape2D : public Dimensions {
+public:
+    virtual float area() const = 0;
+    virtual float perimeter() const = 0;
+    virtual ~Shape2D() {}
+};
+
+class Shape3D : public Dimensions {
+public:
+    virtual float volume() const = 0;
+    virtual float surfaceArea() const = 0;
+    virtual ~Shape3D() {}
+};
+
+// 2D Shapes
+
+class Circle : public Shape2D {
+public:
+    void setDimensions(float r, float = 0, float = 0) override { d1 = r; }
+    float area() const override { return PI * d1 * d1; }
+    float perimeter() const override { return 2 * PI * d1; }
+};
+
+class Rectangle : public Shape2D {
+public:
+    void setDimensions(float w, float h, float = 0) override { d1 = w; d2 = h; }
+    float area() const override { return d1 * d2; }
+    float perimeter() const override { return 2 * (d1 + d2); }
+};
+
+class Triangle : public Shape2D {
+public:
+    void setDimensions(float a, float b, float c) override { d1 = a; d2 = b; d3 = c; }
+    float area() const override {
+        float s = (d1 + d2 + d3) / 2.0f;
+        return sqrt(s * (s - d1) * (s - d2) * (s - d3));
+    }
+    float perimeter() const override { return d1 + d2 + d3; }
+};
+
+// 3D Shapes
+
+class Sphere : public Shape3D {
+public:
+    void setDimensions(float r, float = 0, float = 0) override { d1 = r; }
+    float volume() const override { return (4.0f/3.0f) * PI * d1 * d1 * d1; }
+    float surfaceArea() const override { return 4 * PI * d1 * d1; }
+};
+
+class Cube : public Shape3D {
+public:
+    void setDimensions(float s, float = 0, float = 0) override { d1 = s; }
+    float volume() const override { return d1 * d1 * d1; }
+    float surfaceArea() const override { return 6 * d1 * d1; }
+};
+
+class Cuboid : public Shape3D {
+public:
+    void setDimensions(float l, float w, float h) override { d1 = l; d2 = w; d3 = h; }
+    float volume() const override { return d1 * d2 * d3; }
+    float surfaceArea() const override { return 2 * (d1*d2 + d2*d3 + d1*d3); }
+};
+
+class Cylinder : public Shape3D {
+public:
+    void setDimensions(float r, float h, float = 0) override { d1 = r; d2 = h; }
+    float volume() const override { return PI * d1 * d1 * d2; }
+    float surfaceArea() const override { return 2 * PI * d1 * (d1 + d2); }
+};
+
+int main() {
+    int choice;
+    do {
+        cout << "\n=== Shape Calculator ===\n"
+             << "1) 2D Shapes\n"
+             << "2) 3D Shapes\n"
+             << "3) Quit\n"
+             << "Select: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            cout << "\n-- 2D Shapes --\n"
+                 << "1) Circle\n"
+                 << "2) Rectangle\n"
+                 << "3) Triangle\n"
+                 << "Select: ";
+            int sel; cin >> sel;
+            Shape2D* shape;
+            float a, b, c;
+            switch (sel) {
+                case 1:
+                    shape = new Circle();
+                    cout << "Radius: "; cin >> a;
+                    shape->setDimensions(a);
+                    break;
+                case 2:
+                    shape = new Rectangle();
+                    cout << "Width: "; cin >> a;
+                    cout << "Height: "; cin >> b;
+                    shape->setDimensions(a, b);
+                    break;
+                case 3:
+                    shape = new Triangle();
+                    cout << "Side a: "; cin >> a;
+                    cout << "Side b: "; cin >> b;
+                    cout << "Side c: "; cin >> c;
+                    shape->setDimensions(a, b, c);
+                    break;
+                default:
+                    cout << "Invalid choice.\n";
+                    continue;
+            }
+            cout << "Area = " << shape->area()
+                 << "\nPerimeter = " << shape->perimeter() << "\n";
+            delete shape;
+        }
+        else if (choice == 2) {
+            cout << "\n-- 3D Shapes --\n"
+                 << "1) Sphere\n"
+                 << "2) Cube\n"
+                 << "3) Cuboid\n"
+                 << "4) Cylinder\n"
+                 << "Select: ";
+            int sel; cin >> sel;
+            Shape3D* shape;
+            float a, b, c;
+            switch (sel) {
+                case 1:
+                    shape = new Sphere();
+                    cout << "Radius: "; cin >> a;
+                    shape->setDimensions(a);
+                    break;
+                case 2:
+                    shape = new Cube();
+                    cout << "Side: "; cin >> a;
+                    shape->setDimensions(a);
+                    break;
+                case 3:
+                    shape = new Cuboid();
+                    cout << "Length: "; cin >> a;
+                    cout << "Width: "; cin >> b;
+                    cout << "Height: "; cin >> c;
+                    shape->setDimensions(a, b, c);
+                    break;
+                case 4:
+                    shape = new Cylinder();
+                    cout << "Radius: "; cin >> a;
+                    cout << "Height: "; cin >> b;
+                    shape->setDimensions(a, b);
+                    break;
+                default:
+                    cout << "Invalid choice.\n";
+                    continue;
+            }
+            cout << "Volume = " << shape->volume()
+                 << "\nSurface Area = " << shape->surfaceArea() << "\n";
+            delete shape; 
+        }
+    } while (choice != 3);
+
+    cout << "Exited Program\n";
+    return 0;
+}
